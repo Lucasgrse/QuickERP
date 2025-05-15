@@ -1,3 +1,4 @@
+<?php
 class OrderRequestId {
     public int $requestId;
     public int $productId;

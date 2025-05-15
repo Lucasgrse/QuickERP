@@ -1,4 +1,5 @@
+<?php
 interface StockRepository {
-    
-    public function save(Stock $stock): void
+
+    public function save(Stock $stock): void;
 }

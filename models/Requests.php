@@ -1,3 +1,4 @@
+<?php
 class Requests {
     public int $id;
     public string $requestDate;

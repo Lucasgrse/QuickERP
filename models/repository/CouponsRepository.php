@@ -1,3 +1,4 @@
+<?php
 class CouponsRepository extends BaseRepository{
 
     public function save(Coupons $coupons): void {

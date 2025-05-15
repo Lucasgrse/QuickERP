@@ -1,3 +1,4 @@
+<?php
 class ProductRepository extends BaseRepository {
 
     public function save(Product $product): void {

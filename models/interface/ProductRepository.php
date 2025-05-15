@@ -1,4 +1,5 @@
+<?php
 interface ProductRepository {
-    
-    public function save(Product $product): void
+
+    public function save(Product $product): void;
 }
