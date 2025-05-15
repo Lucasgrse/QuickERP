@@ -1,3 +1,4 @@
+<?php
 class StockRepository extends BaseRepository{
 
     public function save(Stock $stock): void {

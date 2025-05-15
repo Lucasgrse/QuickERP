@@ -1,3 +1,4 @@
+<?php
 class Coupons {
     public int $id;
     public string $code;

@@ -1,3 +1,4 @@
+<?php
 abstract class BaseRepository {
     protected PDO $pdo;
 

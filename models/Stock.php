@@ -1,3 +1,4 @@
+<?php
 class Stock {
     public int $id;
     public int $productId;

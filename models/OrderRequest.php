@@ -1,3 +1,4 @@
+<?php
 require_once 'OrderRequestId.php';
 
 class OrderRequest {
@@ -5,11 +6,7 @@ class OrderRequest {
     public int $quantity;
     public float $unitaryPrice;
 
-    public function __construct(
-        $this->id = $id;,
-        int $quantity = 0,
-        float $unitaryPrice = 0.0
-    ) {
+    public function __construct(int $id = null, int $quantity = 0, float $unitaryPrice = 0.0) {
         $this->id = $id;
         $this->quantity = $quantity;
         $this->unitaryPrice = $unitaryPrice;
