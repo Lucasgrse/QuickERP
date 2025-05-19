@@ -1,10 +1,12 @@
 <?php
 class StockRepository extends BaseRepository implements StockRepositoryInterface{
 
-    public function save(Stock $stock): void {
+    public function save(Stock $stock): int {
         $sql = "INSERT INTO stock (product_id, quantity) VALUES (?, ?)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$stock->productId, $stock->quantity]);
+
+        return (int)$this->pdo->lastInsertId(); 
     }
 
     public function delete(int $id): void {

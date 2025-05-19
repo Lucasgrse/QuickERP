@@ -2,7 +2,7 @@
 class DeleteProductService {
     public function __construct(
         private ProductRepositoryInterface $productRepository,
-        private StockRepositoryInterface $stockRepository
+        private StockRepositoryInterface $stockRepositoryInterface
     ){}
 
      public function deleteProduct(int $id): void {
@@ -12,7 +12,7 @@ class DeleteProductService {
         throw new Exception("Produto não encontrado.");
         }
 
-        $this->stockRepository->deleteByProductId($id);
+        $this->stockRepositoryInterface->deleteByProductId($id);
         $this->productRepository->delete($id);
     }
 }
