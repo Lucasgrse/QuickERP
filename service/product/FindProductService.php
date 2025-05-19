@@ -13,8 +13,8 @@ class FindProductService {
         foreach ($productsData as $data) {
             $product = new Product($data['id'], $data['name'], $data['price']);
             
-            $stock = $this->stockRepository->findByProductId($data['id']);
-            $product->stockQuantity = $stock ? $stock->quantity : 0;
+            $stock = $this->productRepository->findProductsWithQuantity($data['id']);
+            $quantity = $stock ? $stock['quantity'] : 0;
 
             $products[] = $product;
         }

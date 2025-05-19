@@ -1,10 +1,12 @@
 <?php
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface {
 
-    public function save(Product $product): void {
+    public function save(Product $product): int {
         $sql = "INSERT INTO product (name, price) VALUES (?, ?)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$product->name, $product->price]);
+
+        return (int)$this->pdo->lastInsertId(); 
     }
 
     public function delete(int $id): void {
@@ -46,5 +48,25 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $products[] = new Product($row['id'], $row['name'], $row['price']); 
         }
         return $products;
+    }
+
+    public function findProductsWithQuantity(int $id): array {
+        $sql = "SELECT p.id, p.name, p.price, COALESCE(s.quantity, 0) AS stockQty
+            FROM products p
+            LEFT JOIN stock s ON s.product_id = ?";
+        $stmt = $this->pdo->query($sql);
+        $stmt->execute([$id]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+        foreach ($rows as $row) {
+            $result[] = new ProductProjectionImpl(
+                (int)   $row['id'],
+                (string)$row['name'],
+                (float) $row['price'],
+                (int)   $row['stockQty']
+            );
+        }
+        return $result;
     }
 }

@@ -1,10 +1,12 @@
 <?php
 class RequestsRepository extends BaseRepository implements RequestsRepositoryInterface {
     
-    public function save(Requests $requests): void {
+    public function save(Requests $requests): int {
         $sql = "INSERT INTO requests (request_date, total_value, freight, zip_code, address, status) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$requests->requestDate, $requests->totalValue, $requests->freight, $requests->zipCode, $requests->address, $requests->status]);
+
+        return (int)$this->pdo->lastInsertId(); 
     }
 
     public function delete(int $id): void {
