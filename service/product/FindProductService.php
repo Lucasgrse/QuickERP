@@ -2,8 +2,8 @@
 class FindProductService {
 
     public function __construct(
-        private ProductRepository $productRepository,
-        private StockRepository $stockRepository
+        private ProductRepositoryInterface $productRepository,
+        private StockRepositoryInterface $stockRepository
     ) {}
 
     public function findall(): array {

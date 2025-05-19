@@ -1,8 +1,8 @@
 <?php
 class UpdateProductService {
     public function __construct(
-        private ProductRepository $productRepository,
-        private StockRepository $stockRepository
+        private ProductRepositoryInterface $productRepository,
+        private StockRepositoryInterface $stockRepository
     ){}
 
     public function updateProduct(array $data): void {
@@ -15,10 +15,10 @@ class UpdateProductService {
          $product->name = $data['name'];
         $product->price = $data['price'];
 
-        $this->productRepository->update($product);
+        $this->productRepository->copy($product);
 
         $stock = $this->stockRepository->findByProductId($product->id);
         $stock->quantity = $data['quantity'];
-        $this->stockRepository->update($stock);
+        $this->stockRepository->copy($stock);
     }
 }
