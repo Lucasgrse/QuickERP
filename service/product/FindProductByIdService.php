@@ -1,7 +1,7 @@
 <?php
 class FindProductByIdService {
     public function __construct(
-        private ProductRepository $productRepository
+        private ProductRepositoryInterface $productRepository
     ) {}
 
      public function execute(int $id): ?Product {
