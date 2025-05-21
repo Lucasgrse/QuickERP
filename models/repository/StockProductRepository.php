@@ -31,4 +31,16 @@ class StockProductRepository extends BaseRepository implements StockProductRepos
         }
         return $stockProducts;
     }
+
+    public function deleteAll(int $id): array {
+        $sql = "DELETE FROM stock_products WHERE stock_id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+    }
+
+    public function deleteByProductId(int $productId): void {
+        $sql = "SELECT * FROM stock_products WHERE product_id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$productId]);
+    }
 }
