@@ -1,6 +1,10 @@
+ALTER TABLE stock DROP FOREIGN KEY stock_ibfk_1;
+
+RENAME TABLE produtcs TO products;
+
 ALTER TABLE stock
-DROP COLUMN IF EXISTS product_id,
-DROP COLUMN IF EXISTS quantity;
+DROP COLUMN product_id,
+DROP COLUMN quantity;
 
 ALTER TABLE stock 
 ADD COLUMN name VARCHAR(255) NOT NULL,
