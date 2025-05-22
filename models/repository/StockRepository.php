@@ -2,9 +2,9 @@
 class StockRepository extends BaseRepository implements StockRepositoryInterface{
 
     public function save(Stock $stock): int {
-        $sql = "INSERT INTO stock (product_id, quantity) VALUES (?, ?)";
+        $sql = "INSERT INTO stock (name, createdAt) VALUES (?)";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$stock->productId, $stock->quantity]);
+        $stmt->execute([$stock->name, $stock->createdAt]);
 
         return (int)$this->pdo->lastInsertId(); 
     }
@@ -16,11 +16,11 @@ class StockRepository extends BaseRepository implements StockRepositoryInterface
     }
 
     public function copy(Stock $stock): void {
-        $sql = "UPDATE stock SET quantity = ?";
+        $sql = "UPDATE stock SET name = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
-            $stock->quantity
-    ]);
+            $stock->name
+        ]);
     }
 
     public function findById(int $id): ?Stock {
@@ -33,7 +33,7 @@ class StockRepository extends BaseRepository implements StockRepositoryInterface
             return null;
         }
 
-        return new Stock($data['id'], $data['product_id'], $data['quantity']);
+        return new Stock($data['id'], $data['name'], $data['createdAt']);
     }
 
     public function findAll(): array {
@@ -43,27 +43,8 @@ class StockRepository extends BaseRepository implements StockRepositoryInterface
 
         $stock = [];
         foreach($rows as $row){
-            $stock[] = new Stock($row["id"], $row["product_id"], $row["quantity"]);
+            $stock[] = new Stock($row["id"], $row["name"], $row["createdAt"]);
         }
         return $stock;
-    }
-
-    public function deleteByProductId(int $productId): void {
-        $sql = "SELECT * FROM stock WHERE product_id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$productId]);
-    }
-
-    public function findByProductId(int $productId): ?Stock {
-        $sql = "SELECT * FROM stock WHERE product_id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$productId]);
-        $data = $stmt->fetch();
-
-        if($data){
-            return null;
-        }
-
-        return new Stock($data['id'], $data['product_id'], $data['quantity']);
     }
 }

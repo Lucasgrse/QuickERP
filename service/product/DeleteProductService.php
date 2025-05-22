@@ -2,7 +2,7 @@
 class DeleteProductService {
     public function __construct(
         private ProductRepositoryInterface $productRepository,
-        private StockRepositoryInterface $stockRepositoryInterface
+        private StockProductRepositoryInterface $stockProductRepositoryInterface
     ){}
 
      public function deleteProduct(int $id): void {

@@ -8,8 +8,5 @@ class CreateProductService {
     public function saveProduct(array $data): void {
         $product = new Product(null, $data['name'], $data['price']);
         $id = $this->productRepository->save($product);
-
-        $stock = new Stock(null, $id, (int) $data['quantity']);
-        $this->stockRepository->save($stock);
     }
 }

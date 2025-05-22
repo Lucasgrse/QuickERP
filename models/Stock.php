@@ -1,12 +1,12 @@
 <?php
 class Stock {
     public int $id;
-    public int $productId;
-    public int $quantity;
+    public string $name;
+    public string $createdAt;
 
-    public function __construct($id = null, $productId = 0, $quantity = 0) {
+    public function __construct(int $id, string $name, string $createdAt) {
         $this->id = $id;
-        $this->productId = $productId;
-        $this->quantity = $quantity;
+        $this->name = $name;
+        $this->createdAt = $createdAt;
     }
 }
